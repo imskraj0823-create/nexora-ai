@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d1b">
+<title>NEXORA AI | Smart AI Platform</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#080d1b;color:#f5f7ff;min-height:100vh}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{width:245px;background:#10182a;border-right:1px solid #26324a;padding:25px 15px;flex-shrink:0}
+.logo{font-size:25px;font-weight:800;color:#70a5ff;padding:5px 10px 35px}
+.logo span{color:white}
+.nav-title{font-size:11px;color:#7888a8;margin:15px 10px}
+.nav button{display:block;width:100%;padding:13px 12px;margin:5px 0;background:transparent;color:#aebbd4;border:0;border-radius:9px;text-align:left;font-size:14px}
+.nav button:hover,.nav button.active{background:#243c67;color:white}
+.profile{margin-top:35px;padding:14px;background:#1a2740;border-radius:12px;font-size:13px}
+.profile small{color:#94a5c4}
+.main{flex:1;min-width:0;padding:25px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:35px;gap:12px}
+.topbar h2{font-size:21px}
+.topbar p{font-size:12px;color:#95a4c0;margin-top:5px}
+.avatar{width:38px;height:38px;border-radius:50%;background:#2865cb;display:grid;place-items:center;font-weight:bold}
+.welcome{background:linear-gradient(115deg,#153c78,#22275d,#171c39);padding:30px;border-radius:18px;margin-bottom:25px;border:1px solid #37518c}
+.welcome small{color:#c0d5ff}
+.welcome h1{font-size:clamp(25px,4vw,36px);margin:12px 0}
+.welcome p{color:#d1dcf6;font-size:14px;line-height:1.6}
+.section-title{font-size:19px;margin:25px 0 15px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px}
+.card{background:#121d32;border:1px solid #293b5c;padding:20px;border-radius:14px;cursor:pointer;transition:.2s}
+.card:hover{transform:translateY(-3px);border-color:#6599ff}
+.card .emoji{font-size:28px}
+.card h3{font-size:16px;margin:13px 0 7px}
+.card p{font-size:12px;color:#99a9c6;line-height:1.5}
+.workspace{display:none;background:#111b30;border:1px solid #2a3b5b;padding:22px;border-radius:15px;margin-top:20px}
+.workspace h2{margin-bottom:12px}
+.workspace p{color:#9eacc5;font-size:13px;margin-bottom:15px}
+textarea,input{width:100%;background:#091326;border:1px solid #334766;color:white;padding:14px;border-radius:9px;outline:none;margin:7px 0}
+textarea{min-height:125px;resize:vertical}
+.action{background:#3979ee;color:white;border:0;border-radius:9px;padding:12px 18px;margin-top:8px}
+.output{white-space:pre-wrap;overflow-wrap:anywhere;background:#080f20;padding:16px;border-radius:9px;margin-top:15px;color:#c5d9ff;font-size:13px;line-height:1.6;min-height:50px}
+.chatlog{max-height:350px;overflow:auto}
+.message{background:#1c2b46;padding:12px;border-radius:10px;margin:8px 0;font-size:14px;line-height:1.5;white-space:pre-wrap}
+footer{text-align:center;color:#72819e;font-size:12px;padding:30px}
+@media(max-width:700px){
+.app{display:block}
+.sidebar{width:100%;padding:12px;border-right:0;border-bottom:1px solid #26324a}
+.logo{padding:5px 8px 12px}
+.nav-title,.profile{display:none}
+.nav{display:flex;overflow-x:auto;gap:5px}
+.nav button{white-space:nowrap;width:auto;padding:10px;font-size:12px}
+.main{padding:16px}
+.topbar{margin-bottom:22px}
+.welcome{padding:23px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+ <div class="logo">✦ NEXORA<span> AI</span></div>
+ <div class="nav-title">MAIN MENU</div>
+ <nav class="nav">
+  <button class="active" onclick="showPage('home',this)">⌂ Dashboard</button>
+  <button onclick="showPage('chat',this)">✧ AI Chat</button>
+  <button onclick="showPage('resume',this)">▤ Resume Builder</button>
+  <button onclick="showPage('coding',this)">⌘ Coding Assistant</button>
+  <button onclick="showPage('pdf',this)">▧ PDF Assistant</button>
+  <button onclick="showPage('writing',this)">✎ AI Writer</button>
+ </nav>
+ <div class="profile"><b>Sk. Raj</b><br><small>Welcome to Nexora AI</small></div>
+</aside>
+
+<main class="main">
+ <div class="topbar">
+  <div><h2 id="pageTitle">Dashboard</h2><p>Your intelligent workspace</p></div>
+  <div class="avatar">R</div>
+ </div>
+
+ <section id="home">
+  <div class="welcome">
+   <small>✦ YOUR AI POWERED WORKSPACE</small>
+   <h1>Welcome to NEXORA AI</h1>
+   <p>One platform. Multiple possibilities. Explore smart tools to create, learn and work better.</p>
+  </div>
+  <h2 class="section-title">Explore AI Tools</h2>
+  <div class="cards">
+   <div class="card" onclick="openPage('chat')"><div class="emoji">💬</div><h3>AI Chat</h3><p>Ask questions and get AI assistance.</p></div>
+   <div class="card" onclick="openPage('resume')"><div class="emoji">📄</div><h3>Resume Builder</h3><p>Create a professional resume.</p></div>
+   <div class="card" onclick="openPage('coding')"><div class="emoji">💻</div><h3>Coding Assistant</h3><p>Get programming help and explanations.</p></div>
+   <div class="card" onclick="openPage('pdf')"><div class="emoji">📚</div><h3>PDF Assistant</h3><p>Select a PDF and prepare questions about it.</p></div>
+   <div class="card" onclick="openPage('writing')"><div class="emoji">✍️</div><h3>AI Writer</h3><p>Prepare emails and professional content.</p></div>
+  </div>
+ </section>
+
+ <section class="workspace" id="chat">
+  <h2>💬 AI Chat Assistant</h2><p>Write your question below.</p>
+  <div class="chatlog" id="chatlog"></div>
+  <textarea id="chatInput" placeholder="Ask anything..."></textarea>
+  <button class="action" onclick="demoChat()">Send Message →</button>
+ </section>
+
+ <section class="workspace" id="resume">
+  <h2>📄 Resume Builder</h2><p>Enter your details to create a simple resume draft.</p>
+  <input id="rname" placeholder="Full name">
+  <input id="rmail" placeholder="Email">
+  <input id="rskills" placeholder="Skills">
+  <textarea id="rexp" placeholder="Education and experience"></textarea>
+  <button class="action" onclick="makeResume()">Create Resume</button>
+  <div class="output" id="resumeOut">Your resume will appear here.</div>
+  <button class="action" onclick="downloadText('resumeOut','my-resume.txt')">Download Resume</button>
+ </section>
+
+ <section class="workspace" id="coding">
+  <h2>💻 Coding Assistant</h2><p>Describe the coding problem you want help with.</p>
+  <textarea id="codeInput" placeholder="Example: Explain HTML forms with an example..."></textarea>
+  <button class="action" onclick="demoTool('codeInput','codeOut','Coding Assistant')">Get Help</button>
+  <div class="output" id="codeOut">Your coding answer will appear here.</div>
+ </section>
+
+ <section class="workspace" id="pdf">
+  <h2>📚 PDF Assistant</h2><p>Select a PDF document. This demo lets you choose a file, but does not yet read its contents.</p>
+  <input type="file" id="pdfFile" accept=".pdf">
+  <div class="output" id="pdfOut">Your selected PDF name will appear here.</div>
+  <button class="action" onclick="selectPDF()">Select PDF</button>
+ </section>
+
+ <section class="workspace" id="writing">
+  <h2>✍️ AI Writing Assistant</h2><p>Prepare a draft for emails, applications and professional messages.</p>
+  <textarea id="writeInput" placeholder="What do you want to write?"></textarea>
+  <button class="action" onclick="demoTool('writeInput','writeOut','Writing Assistant')">Create Draft</button>
+  <div class="output" id="writeOut">Your writing draft will appear here.</div>
+ </section>
+
+ <footer>© 2026 NEXORA AI · Created by Sk. Raj</footer>
+</main>
+</div>
+
+<script>
+function showPage(id,btn){
+ document.querySelectorAll('main section').forEach(s=>s.style.display='none');
+ document.getElementById(id).style.display=id==='home'?'block':'block';
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+ if(btn)btn.classList.add('active');
+ const titles={home:'Dashboard',chat:'AI Chat Assistant',resume:'Resume Builder',coding:'Coding Assistant',pdf:'PDF Assistant',writing:'AI Writer'};
+ document.getElementById('pageTitle').textContent=titles[id];
+}
+function openPage(id){
+ const buttons=[...document.querySelectorAll('.nav button')];
+ const index={home:0,chat:1,resume:2,coding:3,pdf:4,writing:5}[id];
+ showPage(id,buttons[index]);
+}
+function demoChat(){
+ const input=document.getElementById('chatInput');
+ if(!input.value.trim())return alert('Please enter a question.');
+ const box=document.getElementById('chatlog');
+ const msg=document.createElement('div');
+ msg.className='message';
+ msg.textContent='You: '+input.value+'\n\nNEXORA AI: This is the frontend demo. Connect a secure AI API to receive real AI-generated answers.';
+ box.appendChild(msg);
+ input.value='';
+}
+function makeResume(){
+ const name=document.getElementById('rname').value;
+ const mail=document.getElementById('rmail').value;
+ const skills=document.getElementById('rskills').value;
+ const exp=document.getElementById('rexp').value;
+ if(!name)return alert('Enter your name first.');
+ document.getElementById('resumeOut').textContent=
+ name+'\n'+mail+'\n\nSKILLS\n'+skills+'\n\nEDUCATION & EXPERIENCE\n'+exp;
+}
+function demoTool(inputId,outId,tool){
+ const value=document.getElementById(inputId).value.trim();
+ if(!value)return alert('Please enter some details.');
+ document.getElementById(outId).textContent=
+ 'Your request: '+value+'\n\n'+tool+' is currently in demo mode. Connect a secure AI API to generate a real result.';
+}
+function selectPDF(){
+ const file=document.getElementById('pdfFile').files[0];
+ document.getElementById('pdfOut').textContent=file?
+ 'Selected file: '+file.name+'\nPDF reading will be enabled when the PDF processing feature is connected.':
+ 'Please select a PDF file first.';
+}
+function downloadText(id,filename){
+ const text=document.getElementById(id).textContent;
+ const blob=new Blob([text],{type:'text/plain'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+ a.href=url;a.download=filename;a.click();
+ URL.revokeObjectURL(url);
+}
+showPage('home',document.querySelector('.nav button'));
+</script>
+</body>
+                                                                              </html>
+                                                                                
