@@ -154,15 +154,38 @@ function openPage(id){
  const index={home:0,chat:1,resume:2,coding:3,pdf:4,writing:5}[id];
  showPage(id,buttons[index]);
 }
-function demoChat(){
- const input=document.getElementById('chatInput');
- if(!input.value.trim())return alert('Please enter a question.');
- const box=document.getElementById('chatlog');
- const msg=document.createElement('div');
- msg.className='message';
- msg.textContent='You: '+input.value+'\n\nNEXORA AI: This is the frontend demo. Connect a secure AI API to receive real AI-generated answers.';
- box.appendChild(msg);
- input.value='';
+
+async function demoChat(){
+  const input=document.getElementById('chatInput');
+  const box=document.getElementById('chatlog');
+
+  if(!input.value.trim()){
+    return alert('Please enter a question.');
+  }
+
+  const msg=document.createElement('div');
+  msg.className='message';
+  msg.textContent='You: '+input.value;
+  box.appendChild(msg);
+
+  const question=input.value.trim();
+  input.value='';
+
+  const reply=document.createElement('div');
+  reply.className='message';
+  reply.textContent='NEXORA AI: Connecting to API...';
+  box.appendChild(reply);
+
+  try{
+    const response=await fetch(
+      'https://i.skr426299.workers.dev'
+    );
+    const data=await response.json();
+
+    reply.textContent='NEXORA AI: '+data.message;
+  }catch(error){
+    reply.textContent='NEXORA AI: Connection failed. Please try again.';
+  }
 }
 function makeResume(){
  const name=document.getElementById('rname').value;
